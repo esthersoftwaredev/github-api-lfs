@@ -1,23 +1,41 @@
-import logo from './logo.svg';
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 import './App.css';
 
 function App() {
+  const [issues, setIssues] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    const fetchIssues = async () => {
+      try {
+        const response = await axios.get('https://api.github.com/repos/treeverse/lakeFS/issues');
+        setIssues(response.data);
+        setLoading(false);
+      } catch (err) {
+        setError('Error fetching issues');
+        setLoading(false);
+      }
+    };
+
+    fetchIssues();
+  }, []);
+
+  if (loading) return <div>Loading...</div>;
+  if (error) return <div>{error}</div>;
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <h1>lakeFS GitHub Issues</h1>
+      <ul>
+        {issues.map(issue => (
+          <li key={issue.id}>
+            <h3>#{issue.number} {issue.title}</h3>
+            <p> opened by {issue.user.login}</p>
+          </li>
+        ))}
+      </ul>
     </div>
   );
 }
