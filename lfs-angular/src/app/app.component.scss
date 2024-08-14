@@ -11,20 +11,38 @@ mat-toolbar {
 }
 
 .container {
+  background-color: #e7eff5;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   height: 100%;
+  padding: 2rem;
+
+  mat-accordion {
+    width: 70vw;
+    padding: 0.3rem;
+    border-radius: 0.3rem;
+
+    span {
+      font-weight: 600;
+      margin-right: 0.5rem;
+    }
+  }
+
 }
 
 footer {
   background-color: #a5c6e9;
-  color: white;
+  color: #ececec;
   padding: 10px;
   text-align: center;
 
-  p {
-    margin: 0;
+  a {
+    text-decoration: none;
+    color: #ececec;
+    &:hover {
+      color: #fafafa;
+    }
   }
 }
