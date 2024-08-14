@@ -1,11 +1,12 @@
 import { Component, inject, OnInit, signal } from "@angular/core";
 import { RouterOutlet } from "@angular/router";
+import { GithubApiService } from "./services/github-api.service";
 
 import { MatToolbarModule } from "@angular/material/toolbar";
 import { MatExpansionModule } from "@angular/material/expansion";
+import {MatPaginatorModule, PageEvent} from '@angular/material/paginator';
 import { MatIconModule } from "@angular/material/icon";
 import { MatButtonModule } from "@angular/material/button";
-import { GithubApiService } from "./services/github-api.service";
 
 @Component({
 	selector: "app-root",
@@ -14,6 +15,7 @@ import { GithubApiService } from "./services/github-api.service";
 		RouterOutlet,
 		MatToolbarModule,
 		MatExpansionModule,
+    MatPaginatorModule,
 		MatButtonModule,
 		MatIconModule,
 	],
@@ -22,14 +24,26 @@ import { GithubApiService } from "./services/github-api.service";
 })
 export class AppComponent implements OnInit {
   readonly panelOpenState = signal(false);
-  allIssues: any [] = [];
+  allIssues: any[] = [];
+  totalIssues: number = 0;
+  pageSize: number = 30;
+  currentPage: number = 1;
   githubApiService = inject(GithubApiService);
 
-
   ngOnInit() {
-    this.githubApiService.getAllIssues().subscribe(issues => {
+    this.loadIssues();
+  }
+
+  loadIssues() {
+    this.githubApiService.getAllIssues(this.currentPage, this.pageSize).subscribe(issues => {
       this.allIssues = issues;
-      console.log(issues);
+      this.totalIssues = 200; // to get dynamic value after rate limit renews
     });
+  }
+
+  onPageChange(event: PageEvent) {
+    this.pageSize = event.pageSize;
+    this.currentPage = event.pageIndex + 1;
+    this.loadIssues();
   }
 }

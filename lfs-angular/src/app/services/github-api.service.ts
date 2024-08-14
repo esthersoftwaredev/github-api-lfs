@@ -1,16 +1,20 @@
-import { HttpClient } from '@angular/common/http';
-import { inject, Injectable } from '@angular/core';
+import { HttpClient, HttpParams } from '@angular/common/http';
+import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class GithubApiService {
-  http = inject(HttpClient);
+  private readonly baseUrl = 'https://api.github.com/repos/treeverse/lakeFS/issues';
 
-  constructor() { }
+  constructor(private http: HttpClient) {}
 
-  getAllIssues(): Observable<any[]> {
-    return this.http.get<any[]>(`https://api.github.com/repos/treeverse/lakeFS/issues`);
+  getAllIssues(page: number = 1, perPage: number = 30): Observable<any[]> {
+    const params = new HttpParams()
+      .set('page', page.toString())
+      .set('per_page', perPage.toString());
+
+    return this.http.get<any[]>(this.baseUrl, { params });
   }
 }
