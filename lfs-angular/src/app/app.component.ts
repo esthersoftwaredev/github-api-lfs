@@ -37,7 +37,7 @@ export class AppComponent implements OnInit {
   loadIssues() {
     this.githubApiService.getAllIssues(this.currentPage, this.pageSize).subscribe(issues => {
       this.allIssues = issues;
-      this.totalIssues = 200; // to get dynamic value after rate limit renews
+      this.totalIssues = 291; // to get dynamic value after rate limit renews, if enough time
     });
   }
 
