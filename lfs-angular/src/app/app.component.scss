@@ -46,3 +46,11 @@ footer {
     }
   }
 }
+
+@media (max-width: 768px) {
+  .container {
+    mat-accordion {
+      width: 90vw;
+    }
+  }
+}
