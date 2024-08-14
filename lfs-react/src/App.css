@@ -2,9 +2,47 @@
   text-align: center;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.header {
+  background-color: #c2d4e7;
+  padding: 0.1rem;
+}
+
+.container {
+  background-color: #e7eff5;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 70vh;
+  padding: 2rem;
+}
+
+.accordion {
+  width: 70vw;
+  padding: 0.3rem;
+  border-radius: 0.3rem;
+}
+
+.accordion span {
+  font-weight: 600;
+  margin-right: 0.5rem;
+}
+
+footer {
+  background-color: #a5c6e9;
+  color: #ececec;
+  padding: 10px;
+  text-align: center;
+}
+
+footer a {
+  text-decoration: none;
+  color: #ececec;
+  padding: 0 0.3rem;
+}
+
+footer a:hover {
+  color: #fafafa;
 }
 
 @media (prefers-reduced-motion: no-preference) {
