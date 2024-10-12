@@ -8,6 +8,12 @@
 mat-toolbar {
   background-color: #c2d4e7;
   justify-content: center;
+
+  span {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
 }
 
 .container {

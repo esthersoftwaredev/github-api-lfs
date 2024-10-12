@@ -5,8 +5,9 @@ import { GithubApiService } from "./services/github-api.service";
 import { MatToolbarModule } from "@angular/material/toolbar";
 import { MatExpansionModule } from "@angular/material/expansion";
 import {MatPaginatorModule, PageEvent} from '@angular/material/paginator';
-import { MatIconModule } from "@angular/material/icon";
+import { MatIconModule, MatIconRegistry } from "@angular/material/icon";
 import { MatButtonModule } from "@angular/material/button";
+import { DomSanitizer } from "@angular/platform-browser";
 
 @Component({
 	selector: "app-root",
@@ -26,9 +27,18 @@ export class AppComponent implements OnInit {
   readonly panelOpenState = signal(false);
   allIssues: any[] = [];
   totalIssues: number = 0;
-  pageSize: number = 30;
+  pageSize: number = 10;
   currentPage: number = 1;
   githubApiService = inject(GithubApiService);
+  private iconRegistry = inject(MatIconRegistry);
+  private sanitizer = inject(DomSanitizer);
+
+  constructor() {
+    this.iconRegistry.addSvgIcon(
+      "angular",
+      this.sanitizer.bypassSecurityTrustResourceUrl("/icons/angular.svg")
+    );
+  }
 
   ngOnInit() {
     this.loadIssues();
