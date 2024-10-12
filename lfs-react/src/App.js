@@ -81,7 +81,7 @@ function App() {
       />
       <footer>
         <small>
-          by
+          developed by
           <a href='https://monacodelisa.com' target='_blank' rel="noreferrer">
             Esther White 
           </a>
