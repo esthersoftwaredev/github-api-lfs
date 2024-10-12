@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import reactLogo from './logo.svg';
 import "./App.css";
 import Accordion from "@mui/material/Accordion";
 import AccordionSummary from "@mui/material/AccordionSummary";
@@ -19,7 +20,7 @@ function App() {
       setLoading(true);
       try {
         const response = await axios.get(
-          `https://api.github.com/repos/treeverse/lakeFS/issues?page=${page}&per_page=30`
+          `https://api.github.com/repos/treeverse/lakeFS/issues?page=${page}&per_page=10`
         );
         setIssues(response.data);
         
@@ -55,7 +56,9 @@ function App() {
   return (
     <div className='App'>
       <div className='header'>
-        <h1>lakeFS GitHub Issues</h1>
+        <h1>Open Issues</h1>
+        <img src={reactLogo} className="logo" alt="React logo" />
+        <h1>GitHub API</h1>
       </div>
       <div className='container'>
         {issues.map((issue) => (
