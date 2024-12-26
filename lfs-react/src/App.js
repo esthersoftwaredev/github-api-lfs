@@ -82,7 +82,7 @@ function App() {
       <footer>
         <small>
           developed by
-          <a href='https://monacodelisa.com' target='_blank' rel="noreferrer">
+          <a href='https://esthersoftware.dev' target='_blank' rel="noopener">
             Esther White 
           </a>
           | 08/14/2024
